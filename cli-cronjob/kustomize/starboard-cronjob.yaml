@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: starboard-cli
+  namespace: dev
+spec:
+  schedule: "0 * * * 1"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: starboard-cli
+            image: 3ill/starboard
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - for replicas in `kubectl get replicaset -n dev -o jsonpath="{.items[*].metadata.name}"` ; do echo $replicas; starboard scan vulnerabilityreports replicaset/$replicas --delete-scan-job -n dev ; done
+          restartPolicy: Never
+          serviceAccountName: starboard-cli

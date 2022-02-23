@@ -1,0 +1,4 @@
+# kustomization.yaml contents
+resources:
+- starboard-cronjob.yaml
+- starboard-sa.yaml
