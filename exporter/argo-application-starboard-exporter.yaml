@@ -13,4 +13,4 @@ spec:
       releaseName: starboard-exporter
   destination:
     server: https://kubernetes.default.svc
-    namespace: starboard-system
+    namespace: monitoring
