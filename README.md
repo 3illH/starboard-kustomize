@@ -1,1 +1,2 @@
-# starboard-operator-cli-cronjob
+# starboard-kustomize
+# project to create starboard cli cronjob
