@@ -18,6 +18,6 @@ spec:
             command:
             - /bin/sh
             - -c
-            - for replicas in `kubectl get replicaset -n dev -o jsonpath="{.items[*].metadata.name}"` ; do echo $replicas; starboard scan vulnerabilityreports replicaset/$replicas --delete-scan-job -n dev ; done
+            - for pods in `kubectl get pod -n dev -o jsonpath="{.items[*].metadata.name}"` ; do echo $pods; starboard scan vulnerabilityreports pod/$pods --delete-scan-job -n dev ; sleep 2 ; done
           restartPolicy: Never
           serviceAccountName: starboard-cli
